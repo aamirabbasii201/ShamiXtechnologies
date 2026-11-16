@@ -2565,3 +2565,84 @@ body.sx-lock { overflow: hidden; }
   .sx-reviews-dup { display: none; }
   .full-section h2 em { -webkit-text-fill-color: var(--sx-accent); background: none; }
 }
+/* =============================================================
+   ShamiX V13 — responsive polish: phones, tablets, large & ultrawide screens
+   ============================================================= */
+
+/* Safety nets */
+html, body { max-width: 100%; overflow-x: clip; }
+img, svg, video { max-width: 100%; }
+.full-contact-layout > *, .full-contact-form, .full-contact-sidebar, .form-grid > * { min-width: 0; }
+.full-contact-form { max-width: 100%; box-sizing: border-box; }
+.full-contact-form input, .full-contact-form select, .full-contact-form textarea {
+  width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box;
+}
+.full-contact-form .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sx-form-actions { flex-wrap: wrap; }
+.full-footer-wordmark { max-width: 100%; overflow: hidden; }
+
+/* Large screens: wider container + proportional scaling */
+@media (min-width: 1600px) { .container { width: min(1480px, calc(100% - 160px)); } }
+@media (min-width: 1920px) {
+  body { zoom: 1.15; }
+  .container { width: min(1560px, calc(100% - 160px)); }
+}
+@media (min-width: 2560px) {
+  body { zoom: 1.35; }
+  .container { width: min(1640px, calc(100% - 200px)); }
+}
+@media (min-width: 3400px) {
+  body { zoom: 1.7; }
+  .container { width: min(1760px, calc(100% - 240px)); }
+}
+@supports not (zoom: 1) {
+  @media (min-width: 1920px) { html { font-size: 112%; } }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .sx-reviews-wall.scrolls { height: 560px; }
+  .sx-cta-inner { gap: 24px; }
+}
+
+/* Phones */
+@media (max-width: 760px) {
+  .container { width: calc(100% - 36px); }
+  input, select, textarea { font-size: 16px !important; } /* stops iOS zoom-on-focus */
+  .btn, .nav-cta, .text-link, .full-process-note a { min-height: 48px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .sx-cta-actions, .sx-form-actions { width: 100%; flex-direction: column; align-items: stretch; }
+  .sx-cta-actions .btn, .sx-form-actions .btn { width: 100%; justify-content: center; }
+  .full-contact-form .form-grid { grid-template-columns: minmax(0, 1fr); }
+  .full-contact-form .form-grid .form-full { grid-column: auto; }
+  .form-topline { flex-wrap: wrap; }
+  .full-process-note { flex-direction: column; align-items: flex-start; }
+  .sx-stat { padding: 22px 14px; }
+  .sx-top { bottom: max(14px, env(safe-area-inset-bottom)); right: max(14px, env(safe-area-inset-right)); }
+  .header { padding-top: env(safe-area-inset-top); }
+  .full-footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .sx-review { padding: 20px; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .container { width: calc(100% - 28px); }
+  .sx-stat strong { font-size: 36px; }
+  .architecture-card { transform: scale(.94); transform-origin: top center; }
+}
+
+/* Short landscape screens */
+@media (max-height: 520px) and (orientation: landscape) {
+  .full-hero, .hero { min-height: auto; padding-block: 110px 56px; }
+  .sx-preloader { place-content: center; }
+  .sx-reviews-wall.scrolls { height: 420px; }
+}
+
+/* Touch devices: no sticky hover lifts */
+@media (hover: none) {
+  .sx-review:hover, .sx-engage-card:hover, .full-service-card:hover, .full-project:hover .full-project-art { transform: none; }
+  .sx-glow::before, .sx-glow::after { display: none; }
+}
+
+@media (max-width: 900px) { .sx-float-a, .sx-float-c { display: none; } }

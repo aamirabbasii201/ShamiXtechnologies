@@ -281,9 +281,6 @@ function Hero() {
         </div>
         <div className="full-hero-visual" role="img" aria-label="ShamiX software architecture illustration">
           <div className="visual-orbit orbit-a" /><div className="visual-orbit orbit-b" />
-          <span className="sx-float sx-float-a" aria-hidden="true"><Sparkles size={15} /> AI-ready</span>
-          <span className="sx-float sx-float-b" aria-hidden="true"><Cloud size={15} /> Cloud-native</span>
-          <span className="sx-float sx-float-c" aria-hidden="true"><ShieldCheck size={15} /> Secure by design</span>
           <div className="architecture-card">
             <div className="architecture-bar"><span className="window-lights">● ● ●</span><span>SHAMIX / PRODUCT SYSTEMS</span></div>
             <div className="architecture-heading"><ServerCog size={21} /> From idea to impact</div>
