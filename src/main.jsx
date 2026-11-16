@@ -6,6 +6,7 @@ import {
   Menu, MessageCircle, Palette, Rocket,
   Send, ServerCog, ShieldCheck, Smartphone, Sparkles, Workflow, X,
   Quote, ChevronLeft, ChevronRight, ArrowUp, Star,
+  Bot, BrainCircuit, FileSearch, LineChart, Cpu, Zap, MessagesSquare, Search,
 } from 'lucide-react';
 import './style.css';
 
@@ -138,6 +139,39 @@ const reviews = [
   {"name": "Sage Z.", "role": "Feature redesign", "company": "Demo example", "rating": 4, "text": "A few rounds of feedback were needed, which is normal for a project like this. I appreciated that our comments were taken seriously.", "source": "SAMPLE"},
 ];
 
+
+/* ------------------------------ AI DATA ------------------------------ */
+// Capabilities we offer. Written as services, not as claims about past projects.
+const aiCapabilities = [
+  { icon: Bot, title: 'AI Assistants & Copilots', description: 'Conversational assistants embedded in your product or internal tools, grounded in your own content and rules.', points: ['Customer & staff assistants', 'Tool use & actions', 'Tone and policy control'] },
+  { icon: FileSearch, title: 'Knowledge Search (RAG)', description: 'Ask questions across documents, wikis and databases and get answers that point back to their sources.', points: ['Document ingestion', 'Semantic search', 'Source citations'] },
+  { icon: Workflow, title: 'Workflow Automation', description: 'Automate repetitive, multi-step work such as triage, data entry, routing and reporting, with humans in the loop where it matters.', points: ['Email & ticket triage', 'Approvals & hand-offs', 'System integrations'] },
+  { icon: MessagesSquare, title: 'Document Intelligence', description: 'Extract, classify and summarize contracts, invoices, forms and reports into structured, usable data.', points: ['Data extraction', 'Summaries', 'Classification'] },
+  { icon: LineChart, title: 'Analytics & Prediction', description: 'Turn historical data into forecasts, scores and recommendations that feed straight into dashboards and decisions.', points: ['Forecasting', 'Anomaly detection', 'Recommendations'] },
+  { icon: Cpu, title: 'AI-Accelerated Engineering', description: 'We use modern AI tooling in our own delivery to prototype faster, test more and keep quality high.', points: ['Rapid prototyping', 'Test generation', 'Code review support'] },
+];
+
+const aiPipeline = [
+  ['01', 'Data & context', 'Connect the right sources, clean them and decide what the model should and should not see.'],
+  ['02', 'Model & prompt design', 'Choose a suitable model, design prompts and retrieval, and balance quality, speed and cost.'],
+  ['03', 'Guardrails & evaluation', 'Test against real scenarios, add safety checks and measure results before launch.'],
+  ['04', 'Product & monitoring', 'Ship it inside a polished interface, then monitor usage, quality and spend.'],
+];
+
+const aiPrinciples = [
+  ['Privacy first', 'Sensitive data handling is designed in from day one, not bolted on.'],
+  ['Human in the loop', 'People review and approve actions where mistakes would be costly.'],
+  ['Measured, not guessed', 'We evaluate with real examples so quality is something you can see.'],
+  ['Cost aware', 'Model choice, caching and limits keep usage predictable as you scale.'],
+];
+
+// Scripted, clearly-labelled illustration. NOT a live model.
+const aiDemoScenarios = [
+  { q: 'Summarize the key risks in this supplier contract.', a: 'Three points to review: an auto-renewal clause (section 4), uncapped liability for delays (section 9) and a 60-day termination notice (section 12).' },
+  { q: 'Which open support tickets look urgent?', a: 'Flagged 4 of 37 as urgent: payment failures and a login outage. Drafted replies are ready for your review.' },
+  { q: 'What is our refund policy for annual plans?', a: 'Annual plans can be refunded within 30 days of purchase. Source: Billing Policy, page 2.' },
+];
+
 // Stats are derived from the site's own content, so they never overstate anything.
 const techCount = techGroups.reduce((sum, g) => sum + g.length - 1, 0);
 const stats = [
@@ -148,7 +182,7 @@ const stats = [
 ];
 
 const navLinks = [
-  ['Work', 'work'], ['Services', 'expertise'], ['About', 'about'],
+  ['Work', 'work'], ['Services', 'expertise'], ['AI', 'ai'], ['About', 'about'],
   ['Process', 'process'], ['FAQ', 'faq'], ['Contact', 'contact'],
 ];
 
@@ -441,6 +475,140 @@ function ReviewsWall() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+/* ------------------------------ AI SHOWCASE ------------------------------ */
+function NeuralNet() {
+  const layers = [3, 5, 5, 2];
+  const W = 420, H = 300, padX = 46;
+  const nodes = layers.map((count, li) => Array.from({ length: count }, (_, ni) => ({
+    x: padX + (li * (W - padX * 2)) / (layers.length - 1),
+    y: ((ni + 1) * H) / (count + 1),
+    id: `${li}-${ni}`,
+  })));
+  const links = [];
+  nodes.slice(0, -1).forEach((layer, li) => layer.forEach((a) => nodes[li + 1].forEach((b) => links.push([a, b]))));
+  return (
+    <svg className="sx-neural" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Illustration of a neural network processing data">
+      {links.map(([a, b], i) => (
+        <line key={i} className="sx-link" x1={a.x} y1={a.y} x2={b.x} y2={b.y} style={{ animationDelay: `${(i % 9) * 0.28}s` }} />
+      ))}
+      {nodes.flat().map((n, i) => (
+        <circle key={n.id} className="sx-node" cx={n.x} cy={n.y} r="6" style={{ animationDelay: `${(i % 7) * 0.35}s` }} />
+      ))}
+    </svg>
+  );
+}
+
+function AIChatDemo() {
+  const reduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [i, setI] = useState(0);
+  const [q, setQ] = useState(reduce ? aiDemoScenarios[0].q : '');
+  const [a, setA] = useState(reduce ? aiDemoScenarios[0].a : '');
+  const [thinking, setThinking] = useState(false);
+  const boxRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (reduce || typeof IntersectionObserver === 'undefined') return undefined;
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.25 });
+    if (boxRef.current) io.observe(boxRef.current);
+    return () => io.disconnect();
+  }, [reduce]);
+
+  useEffect(() => {
+    if (reduce || !visible) return undefined;
+    const { q: fullQ, a: fullA } = aiDemoScenarios[i];
+    let cancelled = false;
+    const timers = [];
+    const later = (fn, ms) => { const t = setTimeout(() => { if (!cancelled) fn(); }, ms); timers.push(t); };
+    const type = (text, set, speed, done) => {
+      let n = 0;
+      const step = () => { n += 1; set(text.slice(0, n)); if (n < text.length) later(step, speed); else done(); };
+      step();
+    };
+    setQ(''); setA(''); setThinking(false);
+    later(() => type(fullQ, setQ, 28, () => {
+      later(() => {
+        setThinking(true);
+        later(() => {
+          setThinking(false);
+          type(fullA, setA, 14, () => later(() => setI((x) => (x + 1) % aiDemoScenarios.length), 3400));
+        }, 1000);
+      }, 400);
+    }), 500);
+    return () => { cancelled = true; timers.forEach(clearTimeout); };
+  }, [i, visible, reduce]);
+
+  return (
+    <div className="sx-chat" ref={boxRef}>
+      <div className="sx-chat-bar"><span className="window-lights">● ● ●</span><span>AI ASSISTANT · ILLUSTRATION</span></div>
+      <div className="sx-chat-body" aria-live="off">
+        <div className="sx-msg user">{q || ' '}</div>
+        {thinking && <div className="sx-msg bot sx-typing" aria-hidden="true"><i /><i /><i /></div>}
+        {a && <div className="sx-msg bot"><Bot size={15} /><span>{a}</span></div>}
+      </div>
+      <p className="sx-chat-note">Scripted illustration of how an assistant could behave. Not a live model.</p>
+    </div>
+  );
+}
+
+function AIShowcase() {
+  return (
+    <section id="ai" className="full-section sx-ai" aria-labelledby="ai-heading">
+      <div className="sx-ai-bg" aria-hidden="true" />
+      <div className="container">
+        <div className="full-section-intro">
+          <div>
+            <span className="section-kicker"><span /> ARTIFICIAL INTELLIGENCE</span>
+            <h2 id="ai-heading">AI that does real work <em>inside your product.</em></h2>
+          </div>
+          <p>We design and build practical AI: assistants, search, automation and analytics that fit your data, your workflows and your risk tolerance, and ship as polished products people actually use.</p>
+        </div>
+
+        <div className="sx-ai-hero">
+          <div className="sx-ai-visual sx-ai-reveal">
+            <div className="sx-ai-visual-top"><span className="status-dot" /> DATA → MODEL → PRODUCT</div>
+            <NeuralNet />
+            <div className="sx-ai-tags"><span>Assistants</span><span>RAG</span><span>Automation</span><span>Analytics</span><span>Evaluation</span></div>
+          </div>
+          <div className="sx-ai-demo sx-ai-reveal"><AIChatDemo /></div>
+        </div>
+
+        <div className="sx-ai-grid">
+          {aiCapabilities.map(({ icon: Icon, title, description, points }) => (
+            <article className="sx-ai-card" key={title}>
+              <span className="sx-ai-icon"><Icon size={24} strokeWidth={1.6} /></span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <ul>{points.map((p) => <li key={p}><Zap size={13} />{p}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+
+        <div className="sx-ai-flow">
+          <div className="sx-ai-flow-head"><BrainCircuit size={22} /><h3>How we take AI from idea to production</h3></div>
+          <div className="sx-ai-steps">
+            {aiPipeline.map(([n, title, text]) => (
+              <div className="sx-ai-step" key={n}><span>{n}</span><h4>{title}</h4><p>{text}</p></div>
+            ))}
+          </div>
+        </div>
+
+        <div className="sx-ai-principles">
+          {aiPrinciples.map(([title, text]) => (
+            <div className="sx-ai-principle" key={title}><ShieldCheck size={18} /><div><strong>{title}</strong><small>{text}</small></div></div>
+          ))}
+        </div>
+
+        <div className="sx-ai-cta">
+          <p>Have a process that eats hours, or a product that could be smarter?</p>
+          <a className="btn primary" href="#contact">Discuss an AI project <ArrowUpRight size={19} /></a>
         </div>
       </div>
     </section>
@@ -768,7 +936,7 @@ function Footer() {
     <footer className="full-footer"><div className="container">
       <div className="full-footer-main">
         <div><Brand /><p>Thoughtful digital products. Dependable engineering. Built with intention.</p></div>
-        <div><strong>EXPLORE</strong><a href="#home">Home</a><a href="#expertise">Services</a><a href="#work">Work</a><a href="#about">About</a></div>
+        <div><strong>EXPLORE</strong><a href="#home">Home</a><a href="#expertise">Services</a><a href="#ai">AI</a><a href="#work">Work</a><a href="#about">About</a></div>
         <div><strong>MORE</strong><a href="#technology">Technology</a><a href="#industries">Industries</a><a href="#process">Our process</a><a href="#engagement">Engagement</a><a href="#faq">FAQs</a></div>
         <div><strong>GET IN TOUCH</strong><a href="#contact">Project inquiry</a>{CONTACT.email && <a href={`mailto:${CONTACT.email}`}>Email</a>}{linkedinUrlSafe() && <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}{CONTACT.whatsapp && <a href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>}</div>
       </div>
@@ -818,11 +986,11 @@ function App() {
   useEffect(() => {
     if (typeof IntersectionObserver === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     const variants = {
-      up: '.full-section-intro, .full-project-card, .sx-testimonials-header, .sx-form-actions, .sx-leader-card, .sx-cta-inner, .full-process-note',
-      scale: '.full-service-card, .full-tech-group, .sx-engage-card, .sx-stat, .sx-testimonial-layout',
+      up: '.sx-ai-visual, .full-section-intro, .full-project-card, .sx-testimonials-header, .sx-form-actions, .sx-leader-card, .sx-cta-inner, .full-process-note',
+      scale: '.full-service-card, .full-tech-group, .sx-engage-card, .sx-stat, .sx-testimonial-layout, .sx-ai-card, .sx-ai-step',
       left: '.full-process-step, .full-contact-sidebar, .full-about-layout, .full-values > div, .full-contact-methods > a',
-      right: '.full-contact-form, .sx-contact-meta > div',
-      fade: '.full-industry, .full-faq-item',
+      right: '.full-contact-form, .sx-contact-meta > div, .sx-ai-demo',
+      fade: '.full-industry, .full-faq-item, .sx-ai-principle, .sx-ai-cta',
     };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -844,7 +1012,7 @@ function App() {
   // Cursor-follow spotlight on cards (mouse only).
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-    const glowSelector = '.full-service-card, .full-project-card, .full-tech-group, .full-industry, .sx-engage-card, .full-process-step, .sx-leader-card';
+    const glowSelector = '.full-service-card, .full-project-card, .full-tech-group, .full-industry, .sx-engage-card, .full-process-step, .sx-leader-card, .sx-ai-card';
     document.querySelectorAll(glowSelector).forEach((el) => el.classList.add('sx-glow'));
     let frame = 0;
     const onMove = (e) => {
@@ -872,6 +1040,7 @@ function App() {
         <Stats />
         <TechMarquee />
         <Services />
+        <AIShowcase />
         <Work />
         <About />
         <Technology />
