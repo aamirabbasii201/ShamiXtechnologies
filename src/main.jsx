@@ -5,7 +5,7 @@ import {
   Database, ExternalLink, Globe2, Linkedin, Mail,
   Menu, MessageCircle, Palette, Rocket,
   Send, ServerCog, ShieldCheck, Smartphone, Sparkles, Workflow, X,
-  Quote, ChevronLeft, ChevronRight, ArrowUp,
+  Quote, ChevronLeft, ChevronRight, ArrowUp, Star,
 } from 'lucide-react';
 import './style.css';
 
@@ -104,6 +104,38 @@ const leadership = [
   { role: 'CEO & Founder', label: 'Leadership & Vision', image: '/team/ceo.jpg', initials: 'CEO' },
   { role: 'Manager', label: 'Operations & Delivery', image: '/team/manager.jpg', initials: 'MGR' },
   { role: 'Team Lead', label: 'Engineering & Quality', image: '/team/team-lead.jpg', initials: 'TL' },
+];
+
+/*
+ * FICTIONAL SAMPLE REVIEWS — for layout demonstration only.
+ * These are not actual ShamiX clients or verified customer testimonials.
+ * Replace with permissioned, authentic feedback before public launch.
+ */
+const reviews = [
+  {"name": "Alex M.", "role": "Web platform", "company": "Demo example", "rating": 5, "text": "We had a lot of ideas but no clear place to start. The discovery sessions helped us figure out what actually needed to be in version one.", "source": "SAMPLE"},
+  {"name": "Taylor R.", "role": "Website redesign", "company": "Demo example", "rating": 5, "text": "The new layout feels much easier to use. I especially liked that the team explained why certain design choices made sense.", "source": "SAMPLE"},
+  {"name": "Jordan K.", "role": "Mobile app", "company": "Demo example", "rating": 4, "text": "There were a few tricky parts with the app, but communication stayed clear throughout. That made a big difference for us.", "source": "SAMPLE"},
+  {"name": "Sam P.", "role": "UI/UX design", "company": "Demo example", "rating": 5, "text": "Our original dashboard had too much going on. The revised flow is simpler, and people can find what they need faster.", "source": "SAMPLE"},
+  {"name": "Morgan L.", "role": "Product design", "company": "Demo example", "rating": 5, "text": "I appreciated the small details. Even the empty states and error messages were thought through instead of being left until the end.", "source": "SAMPLE"},
+  {"name": "Casey D.", "role": "Backend development", "company": "Demo example", "rating": 4, "text": "We needed a backend that would be easy to maintain. The structure and documentation gave our developers a good starting point.", "source": "SAMPLE"},
+  {"name": "Jamie W.", "role": "Landing page", "company": "Demo example", "rating": 5, "text": "The first design wasn’t quite the direction we wanted, but the revisions got us there. The final page feels much more like our brand.", "source": "SAMPLE"},
+  {"name": "Riley S.", "role": "App modernization", "company": "Demo example", "rating": 4, "text": "We were worried about changing an existing app. The work was broken into manageable steps, which made the process less stressful.", "source": "SAMPLE"},
+  {"name": "Cameron B.", "role": "SaaS dashboard", "company": "Demo example", "rating": 5, "text": "What stood out was how much attention went into everyday workflows, not just the main screens. That’s where the product improved most.", "source": "SAMPLE"},
+  {"name": "Avery N.", "role": "E-commerce experience", "company": "Demo example", "rating": 5, "text": "Checkout used to feel like a long process. The updated screens are cleaner and the steps make more sense now.", "source": "SAMPLE"},
+  {"name": "Drew H.", "role": "API integration", "company": "Demo example", "rating": 4, "text": "We hit a few integration issues along the way. They were explained clearly, and we agreed on a practical way forward each time.", "source": "SAMPLE"},
+  {"name": "Reese G.", "role": "Startup MVP", "company": "Demo example", "rating": 5, "text": "We didn’t have the budget to build everything at once. Prioritizing the core features helped us get a usable first version.", "source": "SAMPLE"},
+  {"name": "Quinn F.", "role": "Design system", "company": "Demo example", "rating": 5, "text": "The component library saved us from making the same decisions over and over. Handoffs between design and development are smoother.", "source": "SAMPLE"},
+  {"name": "Parker J.", "role": "Business software", "company": "Demo example", "rating": 5, "text": "The most useful change was replacing a bunch of spreadsheets with one straightforward workflow. It’s a lot easier to keep track of things.", "source": "SAMPLE"},
+  {"name": "Skyler T.", "role": "Mobile UX", "company": "Demo example", "rating": 4, "text": "Some of the improvements were surprisingly simple—better labels, clearer buttons, fewer taps. They added up quickly.", "source": "SAMPLE"},
+  {"name": "Robin C.", "role": "Cloud infrastructure", "company": "Demo example", "rating": 5, "text": "The deployment process was explained in plain language, which I appreciated. We also got a clearer picture of what to maintain afterward.", "source": "SAMPLE"},
+  {"name": "Devon A.", "role": "Website build", "company": "Demo example", "rating": 5, "text": "We wanted something polished without feeling overdesigned. The finished layout struck a good balance.", "source": "SAMPLE"},
+  {"name": "Finley O.", "role": "Product strategy", "company": "Demo example", "rating": 4, "text": "They challenged a couple of our assumptions in a helpful way. We ended up with a smaller, more focused scope.", "source": "SAMPLE"},
+  {"name": "Harper E.", "role": "Admin portal", "company": "Demo example", "rating": 5, "text": "Our team spends hours in the admin panel, so usability mattered more than flashy visuals. The updated screens reflect that.", "source": "SAMPLE"},
+  {"name": "Rowan I.", "role": "Frontend development", "company": "Demo example", "rating": 5, "text": "The interface works well across different screen sizes, and the code was organized enough for us to continue building on it.", "source": "SAMPLE"},
+  {"name": "Kendall V.", "role": "Automation concept", "company": "Demo example", "rating": 4, "text": "We started with a repetitive manual task. Mapping out the steps showed where automation would help and where it really wouldn’t.", "source": "SAMPLE"},
+  {"name": "Blake U.", "role": "UI refresh", "company": "Demo example", "rating": 5, "text": "The visual changes are nice, but the clearer navigation is what I notice most when using the product.", "source": "SAMPLE"},
+  {"name": "Emerson Y.", "role": "Technical consulting", "company": "Demo example", "rating": 5, "text": "The advice felt practical, not like a sales pitch. We got a straightforward explanation of the trade-offs.", "source": "SAMPLE"},
+  {"name": "Sage Z.", "role": "Feature redesign", "company": "Demo example", "rating": 4, "text": "A few rounds of feedback were needed, which is normal for a project like this. I appreciated that our comments were taken seriously.", "source": "SAMPLE"},
 ];
 
 // Stats are derived from the site's own content, so they never overstate anything.
@@ -249,6 +281,9 @@ function Hero() {
         </div>
         <div className="full-hero-visual" role="img" aria-label="ShamiX software architecture illustration">
           <div className="visual-orbit orbit-a" /><div className="visual-orbit orbit-b" />
+          <span className="sx-float sx-float-a" aria-hidden="true"><Sparkles size={15} /> AI-ready</span>
+          <span className="sx-float sx-float-b" aria-hidden="true"><Cloud size={15} /> Cloud-native</span>
+          <span className="sx-float sx-float-c" aria-hidden="true"><ShieldCheck size={15} /> Secure by design</span>
           <div className="architecture-card">
             <div className="architecture-bar"><span className="window-lights">● ● ●</span><span>SHAMIX / PRODUCT SYSTEMS</span></div>
             <div className="architecture-heading"><ServerCog size={21} /> From idea to impact</div>
@@ -295,6 +330,123 @@ function TechMarquee() {
     <div className="sx-marquee" aria-label="Technologies we work with">
       <div className="sx-marquee-track">{group(false)}{group(true)}</div>
     </div>
+  );
+}
+
+
+/* ------------------------------ PRELOADER ------------------------------ */
+function Preloader() {
+  const [state, setState] = useState(() => {
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 'gone';
+      if (sessionStorage.getItem('sx-intro')) return 'gone';
+    } catch { /* storage unavailable: just show the intro */ }
+    return 'show';
+  });
+  useEffect(() => {
+    if (state !== 'show') return undefined;
+    try { sessionStorage.setItem('sx-intro', '1'); } catch { /* ignore */ }
+    const t1 = setTimeout(() => setState('leaving'), 1100);
+    const t2 = setTimeout(() => setState('gone'), 1750);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [state]);
+  if (state === 'gone') return null;
+  return (
+    <div className={`sx-preloader ${state === 'leaving' ? 'leaving' : ''}`} aria-hidden="true">
+      <div className="sx-preloader-mark">Shami<span>X</span></div>
+      <div className="sx-preloader-bar"><i /></div>
+      <small>TECHNOLOGIES</small>
+    </div>
+  );
+}
+
+/* ------------------------------ CTA BAND ------------------------------ */
+function CtaBand() {
+  return (
+    <section className="sx-cta" aria-labelledby="cta-heading">
+      <div className="sx-cta-glow" aria-hidden="true" />
+      <div className="container sx-cta-inner">
+        <div>
+          <span className="section-kicker"><span /> READY WHEN YOU ARE</span>
+          <h2 id="cta-heading">Have a product in mind? <em>Let's shape it.</em></h2>
+        </div>
+        <div className="sx-cta-actions">
+          <a className="btn primary" href="#contact">Start a Project <ArrowUpRight size={19} /></a>
+          <a className="btn secondary" href="#process">See how we work <ArrowRight size={18} /></a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------------------- REVIEWS WALL ----------------------------- */
+function Stars({ rating = 0 }) {
+  return (
+    <span className="sx-stars" role="img" aria-label={rating ? `${rating} out of 5 stars` : 'No rating yet'}>
+      {[1, 2, 3, 4, 5].map((n) => <Star key={n} size={15} className={n <= rating ? 'on' : ''} />)}
+    </span>
+  );
+}
+
+function ReviewCard({ review }) {
+  const initials = review.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+  return (
+    <figure className="sx-review sx-glow">
+      <div className="sx-review-top"><Stars rating={review.rating} />{review.source && <small>{review.source}</small>}</div>
+      <blockquote>“{review.text}”</blockquote>
+      <figcaption>
+        <span className="sx-review-avatar">{initials}</span>
+        <span><strong>{review.name}</strong><small>{[review.role, review.company].filter(Boolean).join(' · ')}</small></span>
+        {review.url && <a href={review.url} target="_blank" rel="noopener noreferrer" aria-label={`Read ${review.name}'s review on ${review.source || 'the source'}`}><ExternalLink size={15} /></a>}
+      </figcaption>
+    </figure>
+  );
+}
+
+function ReviewSlot({ index }) {
+  return (
+    <figure className="sx-review sx-review-slot sx-glow">
+      <div className="sx-review-top"><Stars rating={0} /><small>SLOT {String(index + 1).padStart(2, '0')}</small></div>
+      <div className="sx-skeleton"><i /><i /><i style={{ width: '62%' }} /></div>
+      <figcaption>
+        <span className="sx-review-avatar">?</span>
+        <span><strong>Your client's name</strong><small>Role · Company</small></span>
+      </figcaption>
+    </figure>
+  );
+}
+
+function ReviewsWall() {
+  const hasReviews = reviews.length > 0;
+  const items = hasReviews
+    ? reviews.map((r, i) => <ReviewCard key={`${r.name}-${i}`} review={r} />)
+    : Array.from({ length: 9 }, (_, i) => <ReviewSlot key={i} index={i} />);
+  const cols = [[], [], []];
+  items.forEach((el, i) => cols[i % 3].push(el));
+  const scrolls = items.length >= 6;
+
+  return (
+    <section id="reviews" className="full-section sx-reviews" aria-labelledby="reviews-heading">
+      <div className="container">
+        <div className="full-section-intro">
+          <div>
+            <span className="section-kicker"><span /> SAMPLE REVIEW WALL</span>
+            <h2 id="reviews-heading">A preview of <em>client feedback.</em></h2>
+          </div>
+          <p><strong>Illustrative content only.</strong> These {reviews.length} fictional examples demonstrate the review layout and animation. They are not actual client feedback or verified ratings.</p>
+        </div>
+        <div className={`sx-reviews-wall ${scrolls ? 'scrolls' : ''}`}>
+          {cols.map((col, c) => (
+            <div className={`sx-reviews-col col-${c}`} key={c}>
+              <div className="sx-reviews-track">
+                {col}
+                {scrolls && <div className="sx-reviews-dup" aria-hidden="true">{col.map((el) => React.cloneElement(el, { key: `d-${el.key}` }))}</div>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -665,33 +817,57 @@ function App() {
     return () => { document.head.removeChild(ld); };
   }, []);
 
-  // Scroll-reveal.
+  // Scroll-reveal with varied directions.
   useEffect(() => {
     if (typeof IntersectionObserver === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-    const targets = document.querySelectorAll(
-      '.full-section-intro, .full-service-card, .full-project-card, ' +
-      '.full-tech-group, .full-industry, .full-process-step, ' +
-      '.full-process-note, .full-faq-item, .sx-testimonials-header, ' +
-      '.sx-testimonial-layout, .full-contact-form, .sx-engage-card, ' +
-      '.full-contact-sidebar, .full-about-layout, .full-values > div, ' +
-      '.sx-contact-meta > div, .full-contact-methods > a, .sx-form-actions, ' +
-      '.sx-leader-card, .sx-stat'
-    );
+    const variants = {
+      up: '.full-section-intro, .full-project-card, .sx-testimonials-header, .sx-form-actions, .sx-leader-card, .sx-cta-inner, .full-process-note',
+      scale: '.full-service-card, .full-tech-group, .sx-engage-card, .sx-stat, .sx-testimonial-layout',
+      left: '.full-process-step, .full-contact-sidebar, .full-about-layout, .full-values > div, .full-contact-methods > a',
+      right: '.full-contact-form, .sx-contact-meta > div',
+      fade: '.full-industry, .full-faq-item',
+    };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
-    targets.forEach((element, index) => {
-      element.style.setProperty('--reveal-delay', `${(index % 4) * 65}ms`);
-      element.classList.add('reveal-on-scroll');
-      observer.observe(element);
+    let index = 0;
+    Object.entries(variants).forEach(([kind, selector]) => {
+      document.querySelectorAll(selector).forEach((element) => {
+        element.style.setProperty('--reveal-delay', `${(index % 4) * 65}ms`);
+        element.classList.add('reveal-on-scroll', `rv-${kind}`);
+        observer.observe(element);
+        index += 1;
+      });
     });
     return () => observer.disconnect();
   }, []);
 
+  // Cursor-follow spotlight on cards (mouse only).
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const glowSelector = '.full-service-card, .full-project-card, .full-tech-group, .full-industry, .sx-engage-card, .full-process-step, .sx-leader-card';
+    document.querySelectorAll(glowSelector).forEach((el) => el.classList.add('sx-glow'));
+    let frame = 0;
+    const onMove = (e) => {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      const card = e.target.closest && e.target.closest('.sx-glow');
+      if (!card) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        card.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    };
+    document.addEventListener('pointermove', onMove, { passive: true });
+    return () => { document.removeEventListener('pointermove', onMove); cancelAnimationFrame(frame); };
+  }, []);
+
   return (
     <>
+      <Preloader />
       <a className="sx-skip" href="#main">Skip to content</a>
       <Header />
       <main id="main">
@@ -706,8 +882,10 @@ function App() {
         <Process />
         <Engagement />
         <Testimonials />
+        <ReviewsWall />
         <FAQ />
         <Leadership />
+        <CtaBand />
         <Contact />
       </main>
       <Footer />
